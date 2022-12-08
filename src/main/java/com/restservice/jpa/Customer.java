@@ -1,6 +1,10 @@
 package com.restservice.jpa;
 
 
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.context.annotation.Bean;
+import org.springframework.data.jpa.repository.JpaRepository;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -31,5 +35,16 @@ public class Customer {
 
     public String getLastname() {
         return lastname;
+    }
+
+    @Bean
+    CommandLineRunner commandLineRunner(JpaRepository jpaRepository){
+
+        return  args -> {
+
+            Customer nick = new Customer("Nickson", "Kipkorir");
+
+            jpaRepository.save(nick);
+        };
     }
 }
